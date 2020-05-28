@@ -1,7 +1,6 @@
 package com.example.moviememoir.ScreenController;
 
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.os.Bundle;
 
@@ -13,14 +12,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.RatingBar;
+import android.widget.SimpleAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.moviememoir.Model.Watchlist;
 import com.example.moviememoir.R;
 import com.example.moviememoir.ServerConnection.Server;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -84,6 +85,12 @@ public class MovieView extends Fragment {
         releaseDate = bundle.getString("Release Date");
         movieName = bundle.getString("Movie Name");
         bitmap = bundle.getParcelable("Image");
+        if(getArguments().getString("movieExist").equals("false")){
+            addToWatchlistButton.setVisibility(View.INVISIBLE);
+        }
+        else {
+            addToWatchlistButton.setVisibility(View.VISIBLE);
+        }
 
         movieViewMovieNameOutput.setText(movieName);
         new movieDetailAsyncTask().execute(movieID);
@@ -91,16 +98,7 @@ public class MovieView extends Fragment {
         addToWatchlistButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Bundle bundle = new Bundle();
-                Date currentTime = Calendar.getInstance().getTime();
-                bundle.putString("movieID",movieID);
-                bundle.putString("movieName",movieName);
-                bundle.putString("releaseDate",releaseDate);
-                bundle.putString("currentTime",currentTime.toString());
-                Fragment fragment = new Watchlist();
-                fragment.setArguments(bundle);
-                FragmentManager fragmentManager = getFragmentManager();
-                fragmentManager.beginTransaction().replace(R.id.content_frame,fragment).commit();
+                new addToWatchlistAsyncTask().execute(Signin.usertable.getUserid().toString());
             }
         });
 
@@ -197,6 +195,37 @@ public class MovieView extends Fragment {
             }
             movieViewDirectorOutput.setText(allDirectors.toString().replace("[","").replace("]",""));
 
+        }
+    }
+
+    private class addToWatchlistAsyncTask extends AsyncTask<String,Void,List<Watchlist>>{
+
+        @Override
+        protected List<Watchlist> doInBackground(String... strings) {
+            return Home.watchlistViewModel.getWatchlistByID(strings[0]);
+        }
+
+        @Override
+        protected void onPostExecute(List<Watchlist> watchlists) {
+            super.onPostExecute(watchlists);
+            boolean movieExist = true;
+            for (Watchlist watchlist: watchlists){
+                if (watchlist.getMovieid().equals(movieID)){
+                    Toast.makeText(getContext(),"Movie exits in watchlist",Toast.LENGTH_SHORT).show();
+                    movieExist = false;
+                    break;
+                }
+            }
+            if (movieExist){
+                Date date = new Date();
+                SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+                SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm:ss");
+                String addDate = dateFormat.format(date.getTime());
+                String addTime = timeFormat.format(date.getTime());
+                Watchlist watchlist = new Watchlist(movieName,releaseDate,addDate,addTime,String.valueOf(Signin.usertable.getUserid()),movieID);
+                Home.watchlistViewModel.insert(watchlist);
+                Toast.makeText(getContext(),"Movie has been added into watchlist successfully",Toast.LENGTH_SHORT).show();
+            }
         }
     }
 }

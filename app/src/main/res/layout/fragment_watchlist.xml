@@ -3,5 +3,42 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ScreenController.Watchlist"
-    android:orientation="vertical"/>
+    tools:context=".ScreenController.WatchlistScreen"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/watchlistScreenLabel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Watchlist"
+        android:textSize="25dp"
+        android:textStyle="bold"
+        style="@android:style/TextAppearance.Large"/>
+
+    <TextView
+        android:id="@+id/watchlistLabel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Watchlist (Movie name/ Release date/ Add date/ Add Time): "
+        android:layout_marginTop="20dp"/>
+
+    <ListView
+        android:id="@+id/watchlistListView"
+        android:layout_width="match_parent"
+        android:layout_height="172dp">
+
+    </ListView>
+
+    <Button
+        android:id="@+id/watchlistViewButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="View" />
+
+    <Button
+        android:id="@+id/watchlistDeleteButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Delete" />
+
+</LinearLayout>

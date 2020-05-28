@@ -17,7 +17,7 @@ import com.example.moviememoir.ScreenController.Maps;
 import com.example.moviememoir.ScreenController.MovieMemoir;
 import com.example.moviememoir.ScreenController.MovieSearch;
 import com.example.moviememoir.ScreenController.Report;
-import com.example.moviememoir.ScreenController.Watchlist;
+import com.example.moviememoir.ScreenController.WatchlistScreen;
 import com.google.android.material.navigation.NavigationView;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
@@ -69,7 +69,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 replaceFragment(new MovieSearch());
                 break;
             case R.id.watchlist:
-                replaceFragment(new Watchlist());
+                replaceFragment(new WatchlistScreen());
                 break;
             case R.id.movieMemoir:
                 replaceFragment(new MovieMemoir());

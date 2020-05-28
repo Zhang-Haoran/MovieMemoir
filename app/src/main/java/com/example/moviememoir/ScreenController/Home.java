@@ -4,6 +4,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +14,7 @@ import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
 
+import com.example.moviememoir.Model.WatchlistViewModel;
 import com.example.moviememoir.R;
 import com.example.moviememoir.ServerConnection.Server;
 
@@ -36,6 +38,7 @@ public class Home extends Fragment {
     ListView topMovieListView;
     ImageView homeImageView;
     private List<HashMap<String,String>> topMovieList = new ArrayList<>();
+    public static WatchlistViewModel watchlistViewModel;
 
     public Home() {
         // Required empty public constructor
@@ -52,6 +55,9 @@ public class Home extends Fragment {
         topMovieLabel = view.findViewById(R.id.topMovieLabel);
         topMovieListView = view.findViewById(R.id.topMovieListView);
         homeImageView = view.findViewById(R.id.homeImageView);
+        //database initialize
+        watchlistViewModel = new ViewModelProvider(this).get(WatchlistViewModel.class);
+        watchlistViewModel.initializeVars(getActivity().getApplication());
 
         //set welcome user message
         welcomeHomeLabel.setText("Welcome "+ Signin.usertable.getName());

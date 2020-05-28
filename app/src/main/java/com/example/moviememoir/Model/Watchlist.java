@@ -7,7 +7,8 @@ import androidx.room.PrimaryKey;
 @Entity
 public class Watchlist {
     @PrimaryKey(autoGenerate = true)
-    public int uid;
+    @ColumnInfo(name = "watchid")
+    public int watchid;
 
     @ColumnInfo(name = "movieName")
     public String movieName;
@@ -15,22 +16,33 @@ public class Watchlist {
     @ColumnInfo(name = "releaseDate")
     public String releaseDate;
 
-    @ColumnInfo(name = "addingDate")
-    public String addingDate;
+    @ColumnInfo(name = "addDate")
+    public String addDate;
 
-    public Watchlist(int uid, String movieName, String releaseDate, String addingDate) {
-        this.uid = uid;
+    @ColumnInfo(name = "addTime")
+    public String addTime;
+
+    @ColumnInfo(name = "userid")
+    public String userid;
+
+    @ColumnInfo(name = "movieid")
+    public String movieid;
+
+    public Watchlist(String movieName, String releaseDate, String addDate, String addTime, String userid, String movieid) {
         this.movieName = movieName;
         this.releaseDate = releaseDate;
-        this.addingDate = addingDate;
+        this.addDate = addDate;
+        this.addTime = addTime;
+        this.userid = userid;
+        this.movieid = movieid;
     }
 
-    public int getUid() {
-        return uid;
+    public int getWatchid() {
+        return watchid;
     }
 
-    public void setUid(int uid) {
-        this.uid = uid;
+    public void setWatchid(int watchid) {
+        this.watchid = watchid;
     }
 
     public String getMovieName() {
@@ -49,12 +61,35 @@ public class Watchlist {
         this.releaseDate = releaseDate;
     }
 
-    public String getAddingDate() {
-        return addingDate;
+    public String getAddDate() {
+        return addDate;
     }
 
-    public void setAddingDate(String addingDate) {
-        this.addingDate = addingDate;
+    public void setAddDate(String addDate) {
+        this.addDate = addDate;
     }
 
+    public String getAddTime() {
+        return addTime;
+    }
+
+    public void setAddTime(String addTime) {
+        this.addTime = addTime;
+    }
+
+    public String getUserid() {
+        return userid;
+    }
+
+    public void setUserid(String userid) {
+        this.userid = userid;
+    }
+
+    public String getMovieid() {
+        return movieid;
+    }
+
+    public void setMovieid(String movieid) {
+        this.movieid = movieid;
+    }
 }

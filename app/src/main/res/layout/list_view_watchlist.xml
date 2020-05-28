@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/watchlistViewMovieName"
+        android:layout_width="33dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1" />
+
+    <TextView
+        android:id="@+id/watchListViewReleaseDate"
+        android:layout_width="33dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1" />
+
+    <TextView
+        android:id="@+id/watchlistViewAddDate"
+        android:layout_width="33dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1" />
+
+    <TextView
+        android:id="@+id/watchlistViewAddTime"
+        android:layout_width="33dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1" />
+
+    <TextView
+        android:id="@+id/watchlistViewWatchID"
+        android:layout_width="1dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:visibility="invisible" />
+
+    <TextView
+        android:id="@+id/watchlistViewMovieID"
+        android:layout_width="1dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:visibility="invisible" />
+</LinearLayout>
