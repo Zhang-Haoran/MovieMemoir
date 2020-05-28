@@ -99,7 +99,7 @@ public class Home extends Fragment {
             //apply listview
             String[] columnHeader = new String[]{"Movie Name", "Release Date", "Rating Score"};
             int[] dataCell = new int[]{R.id.listViewMovieNameOutput,R.id.listViewReleaseDateOutput,R.id.listViewRatingOutput};
-            SimpleAdapter simpleAdapter = new SimpleAdapter(Home.this.getActivity(),topMovieList,R.layout.list_view_home,columnHeader,dataCell);
+            SimpleAdapter simpleAdapter = new SimpleAdapter(Home.this.getContext(),topMovieList,R.layout.list_view_home,columnHeader,dataCell);
             topMovieListView.setAdapter(simpleAdapter);
         }
     }

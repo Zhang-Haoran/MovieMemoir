@@ -7,4 +7,52 @@
     android:orientation="vertical">
 
 
+    <TextView
+        android:id="@+id/movieMemoirScreenLabel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Movie Memoir"
+        android:textSize="25dp"
+        android:textStyle="bold"
+        style="@android:style/TextAppearance.Large"/>
+
+    <TextView
+        android:id="@+id/movieGenreSpinnerLabel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Movie genre: " />
+
+    <Spinner
+        android:id="@+id/genreSpinner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <Button
+        android:id="@+id/sortByDateButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Sort by date" />
+
+    <Button
+        android:id="@+id/sortByRatingButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Sort by rating" />
+
+    <Button
+        android:id="@+id/sortByPublicRatingButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Sort by public rating" />
+
+    <TextView
+        android:id="@+id/movieMemoirLabel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Movie name/ Release date/ Watch date/ Suburb/ Comment/ Rating/Image: " />
+
+    <ListView
+        android:id="@+id/movieMemoirListView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 </LinearLayout>

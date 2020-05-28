@@ -72,7 +72,7 @@ public class MovieSearch extends Fragment {
     }
 
     //search movie from The movieDB API
-    private class searchMovieAsyncTask extends AsyncTask<String,Void,String>{
+    public class searchMovieAsyncTask extends AsyncTask<String,Void,String>{
 
         @Override
         protected String doInBackground(String... strings) {
