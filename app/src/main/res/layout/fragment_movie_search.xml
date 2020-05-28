@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ScreenController.MovieSearch"
+    android:orientation="vertical">
+
+
+    <TextView
+        android:id="@+id/movieSearchScreenLabel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Search movie"
+        android:textSize="25dp"
+        android:textStyle="bold"
+        style="@android:style/TextAppearance.Large"/>
+
+    <TextView
+        android:id="@+id/movieSearchLabel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:text="Movie name: " />
+
+    <EditText
+        android:id="@+id/movieSearchInput"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName" />
+
+    <Button
+        android:id="@+id/movieSearchButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Search" />
+
+    <TextView
+        android:id="@+id/movieSearchOutput"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Search result (Image/ Moive name/ Release date): " />
+
+    <ListView
+        android:id="@+id/movieSearchListView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+</LinearLayout>

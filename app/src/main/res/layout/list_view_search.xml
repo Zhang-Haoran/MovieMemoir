@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/searchMovieImage"
+        android:layout_width="55dp"
+        android:layout_height="164dp"
+        android:layout_weight="1"
+        tools:srcCompat="@tools:sample/avatars" />
+
+    <TextView
+        android:id="@+id/searchMovieName"
+        android:layout_width="33dp"
+        android:layout_height="166dp"
+        android:layout_weight="1" />
+
+    <TextView
+        android:id="@+id/searchMovieReleaseDate"
+        android:layout_width="33dp"
+        android:layout_height="166dp"
+        android:layout_weight="1" />
+
+    <TextView
+        android:id="@+id/searchMovieID"
+        android:layout_width="1dp"
+        android:layout_height="166dp"
+        android:layout_weight="1"
+        android:visibility="invisible" />
+</LinearLayout>
