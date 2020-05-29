@@ -118,16 +118,13 @@ public class Home extends Fragment {
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
             try {
-                JSONObject jo1 = new JSONObject(s);
-                String a = jo1.getString("candidates");
-                JSONArray ja1 = new JSONArray(a);
-                JSONObject jo2 = (JSONObject) ja1.get(0);
-                String b = jo2.getString("geometry");
-                JSONObject jo3 = new JSONObject(b);
-                String c = jo3.getString("location");
-                JSONObject jo4 = new JSONObject(c);
-                lat = jo4.getString("lat");
-                lng = jo4.getString("lng");
+                JSONObject jsonObject = new JSONObject(s);
+                JSONArray candidates = new JSONArray(jsonObject.getString("candidates"));
+                JSONObject object = (JSONObject) candidates.get(0);
+                JSONObject geometry = new JSONObject(object.getString("geometry"));
+                JSONObject location = new JSONObject(geometry.getString("location"));
+                lat = location.getString("lat");
+                lng = location.getString("lng");
 
 
             } catch (JSONException e) {
