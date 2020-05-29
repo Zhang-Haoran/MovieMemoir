@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "269299863802",
+    "firebase_url": "https://movie-memoir-87bf8.firebaseio.com",
+    "project_id": "movie-memoir-87bf8",
+    "storage_bucket": "movie-memoir-87bf8.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:269299863802:android:a606718b0ad0e8dd6b7943",
+        "android_client_info": {
+          "package_name": "com.example.moviememoir"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "269299863802-0hrnt30n7rjrkh8c1ami6h4no7phn19f.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.moviememoir",
+            "certificate_hash": "275dce317fb9753e624980ad876ff0c86afa088b"
+          }
+        },
+        {
+          "client_id": "269299863802-gb7t4n722f88lah08f6rm1hifelsd63l.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAvL5WyRxeo7lxgaJmjDsgGs6Nj1tFRGbE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "269299863802-gb7t4n722f88lah08f6rm1hifelsd63l.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
