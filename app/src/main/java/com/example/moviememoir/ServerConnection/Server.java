@@ -10,6 +10,7 @@ import com.example.moviememoir.ScreenController.Signin;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.data.PieEntry;
+import com.github.mikephil.charting.interfaces.datasets.IBarDataSet;
 import com.github.mikephil.charting.utils.ColorTemplate;
 import com.google.gson.Gson;
 
@@ -23,6 +24,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Scanner;
 
 public class Server {
@@ -439,44 +441,8 @@ public class Server {
     }
 
     //report findByUseridANDYear
-
     public static String findByUseridANDYear(String year){
-        List<String> xValue = new ArrayList<>();
-        List<Integer> yValue = new ArrayList<>();
-        List<String> dataSets = new ArrayList<>();
-        LinkedHashMap chartDataMap = new LinkedHashMap();
-        String result = getMethod("fit5046assignment1.memoirtable/findByUseridANDYear/",Signin.usertable.getUserid()+"/"+year);
-        try{
-            JSONArray jsonArray = new JSONArray(result);
-            for (int j = 0; j< jsonArray.length();j++){
-                JSONObject jsonObject = jsonArray.getJSONObject(j);
-                xValue.add(jsonObject.getString("month"));
-                yValue.add(Integer.parseInt(jsonObject.getString("totalnumber")));
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-//        chartDataMap.put("Month", yValue);
-//        ArrayList<Integer> colors = new ArrayList<Integer>();
-//        for (int c : ColorTemplate.MATERIAL_COLORS)
-//            colors.add(c);
-//        for (int c : ColorTemplate.JOYFUL_COLORS)
-//            colors.add(c);
-//        colors.add(ColorTemplate.getHoloBlue());
-//        int currentPosition = 0;
-//        for (LinkedHashMap.Entry<String, List<Integer>> entry : chartDataMap.entrySet()) {
-//            String name = entry.getKey();
-//            List<Integer> yValueList = entry.getValue();
-//            List<BarEntry> entries = new ArrayList<>();
-//
-//            for (int i = 0; i < yValueList.size(); i++) {
-//                entries.add(new BarEntry(i, yValueList.get(i)));
-//            }
-//            BarDataSet barDataSet = new BarDataSet(entries, name);
-//            initBarDataSet(barDataSet, colors.get(currentPosition));
-//            dataSets.add(barDataSet);
-//
-//            currentPosition++;
-//    }
-//        return re
+        return getMethod("fit5046assignment1.memoirtable/findByUseridANDYear/",Signin.usertable.getUserid()+"/"+year);
+    }
+
 }

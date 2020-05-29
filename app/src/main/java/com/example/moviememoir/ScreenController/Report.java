@@ -1,6 +1,7 @@
 package com.example.moviememoir.ScreenController;
 
 import android.app.DatePickerDialog;
+import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
 
@@ -20,14 +21,27 @@ import com.example.moviememoir.R;
 import com.example.moviememoir.ServerConnection.Server;
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.charts.PieChart;
+import com.github.mikephil.charting.components.AxisBase;
+import com.github.mikephil.charting.components.Legend;
+import com.github.mikephil.charting.components.XAxis;
+import com.github.mikephil.charting.components.YAxis;
+import com.github.mikephil.charting.data.BarData;
+import com.github.mikephil.charting.data.BarDataSet;
+import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
+import com.github.mikephil.charting.formatter.IAxisValueFormatter;
+import com.github.mikephil.charting.interfaces.datasets.IBarDataSet;
 import com.github.mikephil.charting.utils.ColorTemplate;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
+import java.util.LinkedHashMap;
 import java.util.List;
 
 public class Report extends Fragment {
@@ -46,6 +60,10 @@ public class Report extends Fragment {
     Button barChartButton;
     TextView yearLabel;
     String spinnerState;
+    static List<String> xValue = new ArrayList<>();
+    static List<Integer> yValue = new ArrayList<>();
+    static List<IBarDataSet> dataSets = new ArrayList<>();
+    static LinkedHashMap<String,List<Integer>> chartDataMap = new LinkedHashMap<>();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -128,7 +146,7 @@ public class Report extends Fragment {
         barChartButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                new findByUseridANDYearAsyncTask().execute(spinnerState);
             }
         });
 
@@ -168,7 +186,86 @@ public class Report extends Fragment {
 
         @Override
         protected String doInBackground(String... strings) {
-            return Server.findByUseridANDYear(strings[0]);
+            String result = Server.findByUseridANDYear(strings[0]);
+            try{
+                JSONArray jsonArray = new JSONArray(result);
+                for (int j = 0; j< jsonArray.length();j++){
+                    JSONObject jsonObject = jsonArray.getJSONObject(j);
+                    xValue.add(jsonObject.getString("month"));
+                    yValue.add(Integer.parseInt(jsonObject.getString("totalnumber")));
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            chartDataMap.put("Month", yValue);
+            ArrayList<Integer> colors = new ArrayList<Integer>();
+            for (int c : ColorTemplate.MATERIAL_COLORS)
+                colors.add(c);
+            for (int c : ColorTemplate.JOYFUL_COLORS)
+                colors.add(c);
+            colors.add(ColorTemplate.getHoloBlue());
+            int currentPosition = 0;
+            for (LinkedHashMap.Entry<String, List<Integer>> entry : chartDataMap.entrySet()) {
+                String name = entry.getKey();
+                List<Integer> yValueList = entry.getValue();
+                List<BarEntry> entries = new ArrayList<>();
+
+                for (int i = 0; i < yValueList.size(); i++) {
+                    entries.add(new BarEntry(i, yValueList.get(i)));
+                }
+                BarDataSet barDataSet = new BarDataSet(entries, name);
+                initBarDataSet(barDataSet, colors.get(currentPosition));
+                dataSets.add(barDataSet);
+
+                currentPosition++;
+            }
+            return result;
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            super.onPostExecute(s);
+            BarData data2 = new BarData(dataSets);
+            data2.setBarWidth(0.5f);
+            int barAmount = chartDataMap.size();
+            float groupSpace = 0.3f;
+            float barWidth = (1f - groupSpace) / barAmount;
+            float barSpace = 0f;
+            data2.setBarWidth(barWidth);
+            barChart.setBackgroundColor(Color.WHITE);
+            barChart.setDrawGridBackground(false);
+            barChart.setDrawBarShadow(false);
+            barChart.setHighlightFullBarEnabled(false);
+            barChart.setDrawBorders(true);
+            barChart.setData(data2);
+            XAxis xAxis = barChart.getXAxis();
+            xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
+            xAxis.setAxisMinimum(0f);
+            xAxis.setGranularity(1f);
+            xAxis.setDrawGridLines(false);
+            xAxis.setAxisMinimum(0f);
+            xAxis.setAxisMaximum(xValue.size());
+            xAxis.setCenterAxisLabels(true);
+            YAxis leftAxis = barChart.getAxisLeft();
+            YAxis rightAxis = barChart.getAxisRight();
+            leftAxis.setAxisMinimum(0f);
+            rightAxis.setAxisMinimum(0f);
+
+            Legend legend = barChart.getLegend();
+            legend.setForm(Legend.LegendForm.LINE);
+            legend.setTextSize(11f);
+
+            legend.setVerticalAlignment(Legend.LegendVerticalAlignment.BOTTOM);
+            legend.setHorizontalAlignment(Legend.LegendHorizontalAlignment.LEFT);
+            legend.setOrientation(Legend.LegendOrientation.HORIZONTAL);
+
+            legend.setDrawInside(false);
+            xAxis.setValueFormatter(new IAxisValueFormatter() {
+                @Override
+                public String getFormattedValue(float value, AxisBase axis) {
+                    return xValue.get((int) Math.abs(value) % xValue.size());
+                }
+            });
         }
     }
 
@@ -187,5 +284,12 @@ public class Report extends Fragment {
         }
         result = year + "-" + monthFormatting + '-' + dayFormatting;
         return result;
+    }
+    private static void initBarDataSet(BarDataSet barDataSet, int color) {
+        barDataSet.setColor(color);
+        barDataSet.setFormLineWidth(1f);
+        barDataSet.setFormSize(15.f);
+        barDataSet.setDrawValues(false);
+
     }
 }
