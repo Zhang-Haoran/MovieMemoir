@@ -5,8 +5,12 @@ import com.example.moviememoir.Model.Cinematable;
 import com.example.moviememoir.Model.Credentialstable;
 import com.example.moviememoir.Model.Memoirtable;
 import com.example.moviememoir.Model.Usertable;
-import com.example.moviememoir.ScreenController.Home;
 import com.example.moviememoir.ScreenController.Maps;
+import com.example.moviememoir.ScreenController.Signin;
+import com.github.mikephil.charting.data.BarDataSet;
+import com.github.mikephil.charting.data.BarEntry;
+import com.github.mikephil.charting.data.PieEntry;
+import com.github.mikephil.charting.utils.ColorTemplate;
 import com.google.gson.Gson;
 
 import org.json.JSONArray;
@@ -17,7 +21,7 @@ import java.io.PrintWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Scanner;
 
@@ -107,6 +111,9 @@ public class Server {
         }
         return result;
     }
+
+
+
 //home get cinema
     public static String findCinema() {
     return getMethod("fit5046assignment1.cinematable/","");
@@ -413,4 +420,63 @@ public class Server {
         return null;
     }
 
+
+    //report findByUseridANDStartingdateANDEnddate
+    public static List<PieEntry> findByUseridANDStartingdateANDEnddate(String startingdate, String endingdate){
+        List<PieEntry> pieEntryList = new ArrayList<>();
+        String result = getMethod("fit5046assignment1.cinematable/findByUseridANDStartingdateANDEnddate/", Signin.usertable.getUserid() +"/"+startingdate+"/"+endingdate);
+        try{
+            JSONArray jsonArray = new JSONArray(result);
+            for (int j = 0; j<jsonArray.length();j++){
+                JSONObject jsonObject = jsonArray.getJSONObject(j);
+                PieEntry pieEntry = new PieEntry(Integer.parseInt(jsonObject.getString("totalnumber")),jsonObject.getString("suburb"));
+                pieEntryList.add(pieEntry);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return pieEntryList;
+    }
+
+    //report findByUseridANDYear
+
+    public static String findByUseridANDYear(String year){
+        List<String> xValue = new ArrayList<>();
+        List<Integer> yValue = new ArrayList<>();
+        List<String> dataSets = new ArrayList<>();
+        LinkedHashMap chartDataMap = new LinkedHashMap();
+        String result = getMethod("fit5046assignment1.memoirtable/findByUseridANDYear/",Signin.usertable.getUserid()+"/"+year);
+        try{
+            JSONArray jsonArray = new JSONArray(result);
+            for (int j = 0; j< jsonArray.length();j++){
+                JSONObject jsonObject = jsonArray.getJSONObject(j);
+                xValue.add(jsonObject.getString("month"));
+                yValue.add(Integer.parseInt(jsonObject.getString("totalnumber")));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+//        chartDataMap.put("Month", yValue);
+//        ArrayList<Integer> colors = new ArrayList<Integer>();
+//        for (int c : ColorTemplate.MATERIAL_COLORS)
+//            colors.add(c);
+//        for (int c : ColorTemplate.JOYFUL_COLORS)
+//            colors.add(c);
+//        colors.add(ColorTemplate.getHoloBlue());
+//        int currentPosition = 0;
+//        for (LinkedHashMap.Entry<String, List<Integer>> entry : chartDataMap.entrySet()) {
+//            String name = entry.getKey();
+//            List<Integer> yValueList = entry.getValue();
+//            List<BarEntry> entries = new ArrayList<>();
+//
+//            for (int i = 0; i < yValueList.size(); i++) {
+//                entries.add(new BarEntry(i, yValueList.get(i)));
+//            }
+//            BarDataSet barDataSet = new BarDataSet(entries, name);
+//            initBarDataSet(barDataSet, colors.get(currentPosition));
+//            dataSets.add(barDataSet);
+//
+//            currentPosition++;
+//    }
+//        return re
 }

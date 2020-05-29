@@ -51,7 +51,7 @@ public class Maps extends Fragment implements OnMapReadyCallback  {
         LatLng loc = new LatLng(Double.parseDouble(Home.lat), Double.parseDouble(Home.lng));
         this.googleMap.addMarker(new MarkerOptions().position(loc).title("Home"));
             LatLng cinema = new LatLng(Double.parseDouble(cinemaLat), Double.parseDouble(cinemaLng));
-            googleMap.addMarker(new MarkerOptions().position(cinema).title(Home.cinemaNameList.get(0)).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN)).alpha(0.7f));
+            googleMap.addMarker(new MarkerOptions().position(cinema).title(Home.cinemaNameList.get(0)).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE)).alpha(0.7f));
 
         this.googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(loc, 12.0f));
     }

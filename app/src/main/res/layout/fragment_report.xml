@@ -6,4 +6,95 @@
     tools:context=".ScreenController.Report"
     android:orientation="vertical">
 
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/reportScreenLabel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Report"
+                android:textSize="25dp"
+                android:textStyle="bold"
+                style="@android:style/TextAppearance.Large"/>
+
+            <TextView
+                android:id="@+id/startDateLabel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Start Date: " />
+
+            <TextView
+                android:id="@+id/startDateOutput"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <Button
+                android:id="@+id/startDateButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Add a start date" />
+
+            <TextView
+                android:id="@+id/endDateLabel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="End date: " />
+
+            <TextView
+                android:id="@+id/endDateOutput"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <Button
+                android:id="@+id/endDateButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Add a end date" />
+
+            <Button
+                android:id="@+id/pieChartButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Generate pie chart" />
+
+            <com.github.mikephil.charting.charts.PieChart
+                android:id="@+id/pie_chart"
+                android:layout_width="380dp"
+                android:layout_height="480dp"
+                android:layout_gravity="center" />
+
+            <TextView
+                android:id="@+id/yearLabel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="Year: " />
+
+            <Spinner
+                android:id="@+id/yearSpinner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <Button
+                android:id="@+id/barChartButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Generate bar chart" />
+
+            <com.github.mikephil.charting.charts.BarChart
+                android:id="@+id/bar_chart"
+                android:layout_width="380dp"
+                android:layout_height="480dp"
+                android:layout_gravity="center" />
+
+        </LinearLayout>
+    </ScrollView>
+
 </LinearLayout>
