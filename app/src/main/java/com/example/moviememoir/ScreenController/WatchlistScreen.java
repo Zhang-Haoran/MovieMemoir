@@ -2,6 +2,7 @@ package com.example.moviememoir.ScreenController;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.net.Uri;
 import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -19,6 +20,10 @@ import android.widget.Toast;
 
 import com.example.moviememoir.Model.Watchlist;
 import com.example.moviememoir.R;
+import com.facebook.CallbackManager;
+import com.facebook.FacebookSdk;
+import com.facebook.share.model.ShareLinkContent;
+import com.facebook.share.widget.ShareDialog;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -35,6 +40,9 @@ public class WatchlistScreen extends Fragment {
     private String movieID;
     private String watchID;
     private String movieName;
+    Button shareButton;
+    CallbackManager callbackManager;
+    ShareDialog shareDialog;
 
     private List<HashMap<String,String>> allWachlistsWithAllInformation = new ArrayList<>();
 
@@ -49,6 +57,22 @@ public class WatchlistScreen extends Fragment {
         watchlistListView = view.findViewById(R.id.watchlistListView);
         watchlistViewButton = view.findViewById(R.id.watchlistViewButton);
         watchlistDeleteButton = view.findViewById(R.id.watchlistDeleteButton);
+        shareButton = view.findViewById(R.id.shareButton);
+
+        FacebookSdk.sdkInitialize(this.getContext().getApplicationContext());
+        callbackManager = CallbackManager.Factory.create();
+        shareDialog = new ShareDialog(this);
+        shareButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ShareLinkContent linkContent = new ShareLinkContent.Builder().setQuote("This is the movie name in my watchlist")
+                        .setContentUrl(Uri.parse("https://www.themoviedb.org/"))
+                        .build();
+                if (ShareDialog.canShow(ShareLinkContent.class)){
+                    shareDialog.show(linkContent);
+                }
+            }
+        });
 
         Home.watchlistViewModel.getAllWatchlist(String.valueOf(Signin.usertable.getUserid())).observe(getViewLifecycleOwner(), new Observer<List<Watchlist>>() {
             @Override

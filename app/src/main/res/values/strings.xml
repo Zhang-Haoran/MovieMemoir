@@ -2,6 +2,8 @@
     <string name="app_name">Movie Memoir</string>
     <string name="Open">open</string>
     <string name="Close">close</string>
+    <string name="facebook_app_id">871723556644911</string>
+    <string name="facebook_login_protocol_scheme">fb871723556644911</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
