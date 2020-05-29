@@ -19,6 +19,7 @@
         android:id="@+id/watchlistLabel"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:textStyle="bold"
         android:text="Watchlist (Movie name/ Release date/ Add date/ Add Time): "
         android:layout_marginTop="20dp"/>
 

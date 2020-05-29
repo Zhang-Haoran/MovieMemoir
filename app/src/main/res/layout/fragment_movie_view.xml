@@ -29,6 +29,7 @@
                 android:id="@+id/movieViewMovieNameLabel"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textStyle="bold"
                 android:layout_marginTop="20dp"
                 android:text="Movie Name: " />
 
@@ -41,6 +42,7 @@
                 android:id="@+id/movieViewReleaseDateLabel"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textStyle="bold"
                 android:layout_marginTop="20dp"
                 android:text="Release date: " />
 
@@ -53,6 +55,7 @@
                 android:id="@+id/movieViewGenreLabel"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textStyle="bold"
                 android:layout_marginTop="20dp"
                 android:text="Genre: " />
 
@@ -65,6 +68,7 @@
                 android:id="@+id/movieViewCastLabel"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textStyle="bold"
                 android:layout_marginTop="20dp"
                 android:text="Casts: " />
 
@@ -77,6 +81,7 @@
                 android:id="@+id/movieViewCountryLabel"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textStyle="bold"
                 android:layout_marginTop="20dp"
                 android:text="Country: " />
 
@@ -89,6 +94,7 @@
                 android:id="@+id/movieViewDirectorLabel"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textStyle="bold"
                 android:layout_marginTop="20dp"
                 android:text="Directors: " />
 
@@ -101,6 +107,7 @@
                 android:id="@+id/movieViewSummaryLabel"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textStyle="bold"
                 android:layout_marginTop="20dp"
                 android:text="Summary: " />
 
@@ -112,6 +119,7 @@
             <TextView
                 android:id="@+id/movieViewRatingLabel"
                 android:layout_width="match_parent"
+                android:textStyle="bold"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:text="Rating: " />

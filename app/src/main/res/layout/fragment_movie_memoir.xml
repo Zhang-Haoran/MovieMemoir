@@ -49,6 +49,7 @@
         android:id="@+id/movieMemoirLabel"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:textStyle="bold"
         android:text="Movie name/ Release date/ Watch date/ Suburb/ Comment/ Rating/Image: " />
 
     <ListView
