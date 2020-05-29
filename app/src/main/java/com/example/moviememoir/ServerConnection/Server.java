@@ -5,6 +5,8 @@ import com.example.moviememoir.Model.Cinematable;
 import com.example.moviememoir.Model.Credentialstable;
 import com.example.moviememoir.Model.Memoirtable;
 import com.example.moviememoir.Model.Usertable;
+import com.example.moviememoir.ScreenController.Home;
+import com.example.moviememoir.ScreenController.Maps;
 import com.google.gson.Gson;
 
 import org.json.JSONArray;
@@ -15,13 +17,14 @@ import java.io.PrintWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Scanner;
 
 public class Server {
     public static final String BASE_URL = "http://192.168.1.103:8080/FIT5046Assignment1/webresources/";
     private static final String apiKey = "78324a2485620d39b0d6d391ac0573e6";
-    private static final String googleapiKey = "AIzaSyA6vV43UTpOMZ1vWPGh2ak8jC2AlGhAQE4";
+    private static final String googleapiKey = "AIzaSyBIeGgwS8d-kgu7j9ooH-AWk46QCmPTcVo";
     private static String getMethod(String methodPath, String parameterInput){
         URL url = null;
         HttpURLConnection httpURLConnection = null;
@@ -104,7 +107,10 @@ public class Server {
         }
         return result;
     }
-
+//home get cinema
+    public static String findCinema() {
+    return getMethod("fit5046assignment1.cinematable/","");
+    }
 
 //movie memoir screen
     public static String findAllMovieMemoir() {
@@ -366,6 +372,45 @@ public class Server {
             httpURLConnection.disconnect();
         }
         return result;
+    }
+
+    //connect to the google map to search location
+    public static Void findCinemaByName(String cinemaName){
+            URL url = null;
+            HttpURLConnection httpURLConnection = null;
+            String result = "";
+            try {
+                url = new URL("https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input="+cinemaName+"&inputtype=textquery&fields=photos,formatted_address,name,rating,opening_hours,geometry&key="+googleapiKey);
+                httpURLConnection = (HttpURLConnection) url.openConnection();
+                httpURLConnection.setReadTimeout(10000);
+                httpURLConnection.setConnectTimeout(15000);
+                httpURLConnection.setRequestMethod("GET");
+                httpURLConnection.setRequestProperty("Content-Type", "application/json");
+                httpURLConnection.setRequestProperty("Accept", "application/json");
+
+                Scanner inStream = new Scanner(httpURLConnection.getInputStream());
+                while (inStream.hasNextLine()) {
+                    result += inStream.nextLine();
+                }
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            } finally {
+                httpURLConnection.disconnect();
+            }
+            try {
+                JSONObject jsonObject = new JSONObject(result);
+                JSONArray candidates = new JSONArray(jsonObject.getString("candidates"));
+                JSONObject object = (JSONObject) candidates.get(0);
+                JSONObject geometry = new JSONObject(object.getString("geometry"));
+                JSONObject location = new JSONObject(geometry.getString("location"));
+                Maps.cinemaLat = location.getString("lat");
+                Maps.cinemaLng = location.getString("lng");
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+        return null;
     }
 
 }

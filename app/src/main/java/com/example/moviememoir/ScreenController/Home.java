@@ -41,6 +41,8 @@ public class Home extends Fragment {
     public static String lng;
     private List<HashMap<String,String>> topMovieList = new ArrayList<>();
     public static WatchlistViewModel watchlistViewModel;
+    public static List<String> cinemaNameList = new ArrayList<>();
+    public static List<HashMap<String,String>> cinemaData = new ArrayList<>();
 
     public Home() {
         // Required empty public constructor
@@ -130,7 +132,39 @@ public class Home extends Fragment {
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-
+            new getCinemaAsyncTask().execute();
         }
     }
+    private static class getCinemaAsyncTask extends AsyncTask<Void,Void,String>{
+
+        @Override
+        protected String doInBackground(Void... voids) {
+            return Server.findCinema();
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            super.onPostExecute(s);
+            try {
+                JSONArray jsonArray = new JSONArray(s);
+                for (int j = 0; j<jsonArray.length();j++){
+                    JSONObject jsonObject = jsonArray.getJSONObject(j);
+                    cinemaNameList.add(jsonObject.getString("cinemaname"));
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+            new googleFindCinemaAsyncTask().execute();
+        }
+    }
+
+    private static class googleFindCinemaAsyncTask extends AsyncTask<String, Void, Void> {
+
+        @Override
+        protected Void doInBackground(String... strings) {
+            return Server.findCinemaByName(cinemaNameList.get(0));
+        }
+    }
+
 }
