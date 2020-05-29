@@ -99,7 +99,7 @@ public class Report extends Fragment {
                    }
                },calendarYear,calendarMonth,caldendarDay); //set current day, month, year into datepicker
                DatePicker datePicker = datePickerDialog.getDatePicker();//initialize datepicker to set max date, get the datetime that user picked
-               datePicker.setMaxDate(System.currentTimeMillis());//dob is no more than current date
+               datePicker.setMaxDate(System.currentTimeMillis());//no more than current date
                datePickerDialog.show();
            }
        });
@@ -114,7 +114,7 @@ public class Report extends Fragment {
                    }
                },calendarYear,calendarMonth,caldendarDay); //set current day, month, year into datepicker
                DatePicker datePicker = datePickerDialog.getDatePicker();//initialize datepicker to set max date, get the datetime that user picked
-               datePicker.setMaxDate(System.currentTimeMillis());//dob is no more than current date
+               datePicker.setMaxDate(System.currentTimeMillis());//no more than current date
                datePickerDialog.show();
            }
        });
