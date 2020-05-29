@@ -10,7 +10,6 @@ import com.example.moviememoir.ScreenController.Signin;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.data.PieEntry;
-import com.github.mikephil.charting.interfaces.datasets.IBarDataSet;
 import com.github.mikephil.charting.utils.ColorTemplate;
 import com.google.gson.Gson;
 
@@ -24,7 +23,6 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Scanner;
 
 import static com.example.moviememoir.ScreenController.Report.chartDataMap;
