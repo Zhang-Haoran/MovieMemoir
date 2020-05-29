@@ -18,6 +18,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
+
         >
 
         <!--
@@ -30,7 +31,7 @@
         -->
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="@string/google_maps_key" />
+            android:value="AIzaSyA6vV43UTpOMZ1vWPGh2ak8jC2AlGhAQE4" />
 
         <activity android:name=".ScreenController.Signup" />
         <activity android:name=".ScreenController.Signin">

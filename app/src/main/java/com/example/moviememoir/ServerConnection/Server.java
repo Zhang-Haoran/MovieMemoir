@@ -21,6 +21,7 @@ import java.util.Scanner;
 public class Server {
     public static final String BASE_URL = "http://192.168.1.103:8080/FIT5046Assignment1/webresources/";
     private static final String apiKey = "78324a2485620d39b0d6d391ac0573e6";
+    private static final String googleapiKey = "AIzaSyA6vV43UTpOMZ1vWPGh2ak8jC2AlGhAQE4";
     private static String getMethod(String methodPath, String parameterInput){
         URL url = null;
         HttpURLConnection httpURLConnection = null;
@@ -338,5 +339,33 @@ public class Server {
         return details;
     }
 
+
+    //connect to the google map to search location
+    public static String findLocation(String searchInput){
+
+        URL url = null;
+        HttpURLConnection httpURLConnection = null;
+        String result = "";
+        try {
+            url = new URL("https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input="+searchInput+"&inputtype=textquery&fields=photos,formatted_address,name,rating,opening_hours,geometry&key="+googleapiKey);
+            httpURLConnection = (HttpURLConnection) url.openConnection();
+            httpURLConnection.setReadTimeout(10000);
+            httpURLConnection.setConnectTimeout(15000);
+            httpURLConnection.setRequestMethod("GET");
+            httpURLConnection.setRequestProperty("Content-Type", "application/json");
+            httpURLConnection.setRequestProperty("Accept", "application/json");
+
+            Scanner inStream = new Scanner(httpURLConnection.getInputStream());
+            while (inStream.hasNextLine()) {
+                result += inStream.nextLine();
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            httpURLConnection.disconnect();
+        }
+        return result;
+    }
 
 }

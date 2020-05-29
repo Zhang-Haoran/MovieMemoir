@@ -15,6 +15,7 @@ import com.example.moviememoir.MainActivity;
 import com.example.moviememoir.Model.Usertable;
 import com.example.moviememoir.R;
 import com.example.moviememoir.ServerConnection.Server;
+import com.google.android.gms.maps.model.LatLng;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -34,6 +35,7 @@ public class Signin extends AppCompatActivity {
     EditText passwordInput;
     Button signinButton;
     Button signupButton;
+
     public static Usertable usertable = new Usertable();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -112,6 +114,7 @@ public class Signin extends AppCompatActivity {
                         Signin.usertable.setDob(useridJson.getString("dob"));
                         Signin.usertable.setAddress(useridJson.getString("address"));
                     }
+
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -146,6 +149,7 @@ public class Signin extends AppCompatActivity {
         }
         return "";
     }
+
 
 
 }

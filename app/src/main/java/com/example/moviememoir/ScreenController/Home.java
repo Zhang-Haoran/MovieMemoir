@@ -37,6 +37,8 @@ public class Home extends Fragment {
     TextView topMovieLabel;
     ListView topMovieListView;
     ImageView homeImageView;
+    public static String lat;
+    public static String lng;
     private List<HashMap<String,String>> topMovieList = new ArrayList<>();
     public static WatchlistViewModel watchlistViewModel;
 
@@ -101,6 +103,37 @@ public class Home extends Fragment {
             int[] dataCell = new int[]{R.id.listViewMovieNameOutput,R.id.listViewReleaseDateOutput,R.id.listViewRatingOutput};
             SimpleAdapter simpleAdapter = new SimpleAdapter(Home.this.getContext(),topMovieList,R.layout.list_view_home,columnHeader,dataCell);
             topMovieListView.setAdapter(simpleAdapter);
+            new findUserLocationAsyncTask().execute(Signin.usertable.getAddress());
+        }
+    }
+
+    private static class findUserLocationAsyncTask extends AsyncTask<String,Void,String>{
+
+        @Override
+        protected String doInBackground(String... strings) {
+            return Server.findLocation(strings[0]);
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            super.onPostExecute(s);
+            try {
+                JSONObject jo1 = new JSONObject(s);
+                String a = jo1.getString("candidates");
+                JSONArray ja1 = new JSONArray(a);
+                JSONObject jo2 = (JSONObject) ja1.get(0);
+                String b = jo2.getString("geometry");
+                JSONObject jo3 = new JSONObject(b);
+                String c = jo3.getString("location");
+                JSONObject jo4 = new JSONObject(c);
+                lat = jo4.getString("lat");
+                lng = jo4.getString("lng");
+
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
         }
     }
 }
