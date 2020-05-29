@@ -174,7 +174,7 @@ public class Report extends Fragment {
             for (int c : ColorTemplate.LIBERTY_COLORS)
                 colors.add(c);
             colors.add(ColorTemplate.getHoloBlue());
-            PieDataSet pieDataSet = new PieDataSet(pieEntries, "");
+            PieDataSet pieDataSet = new PieDataSet(pieEntries, "measure by %");
             pieChart.setUsePercentValues(true);
             pieDataSet.setColors(colors);
             pieDataSet.setValueTextSize(12f);
