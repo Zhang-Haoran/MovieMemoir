@@ -32,6 +32,7 @@ import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
 import com.github.mikephil.charting.formatter.IAxisValueFormatter;
+import com.github.mikephil.charting.formatter.PercentFormatter;
 import com.github.mikephil.charting.interfaces.datasets.IBarDataSet;
 import com.github.mikephil.charting.utils.ColorTemplate;
 
@@ -174,7 +175,9 @@ public class Report extends Fragment {
                 colors.add(c);
             colors.add(ColorTemplate.getHoloBlue());
             PieDataSet pieDataSet = new PieDataSet(pieEntries, "");
+            pieChart.setUsePercentValues(true);
             pieDataSet.setColors(colors);
+            pieDataSet.setValueTextSize(12f);
             PieData pie = new PieData();
             pie.setDataSet(pieDataSet);
             pieChart.setData(pie);
