@@ -146,7 +146,7 @@ public class MovieSearch extends Fragment {
                     bundle.putString("Movie Name",classifiedAPImovieList.get(position).get("Movie Name").toString());
                     bundle.putString("Release Date",classifiedAPImovieList.get(position).get("Release Date").toString());
                     bundle.putString("MovieID",classifiedAPImovieList.get(position).get("MovieID").toString());
-
+                    bundle.putString("movieExist","not exist");
                     fragment.setArguments(bundle);
                     FragmentManager fragmentManager = getFragmentManager();
                     fragmentManager.beginTransaction().replace(R.id.content_frame,fragment).commit();

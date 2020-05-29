@@ -19,6 +19,8 @@ import android.widget.Toast;
 import com.example.moviememoir.Model.Watchlist;
 import com.example.moviememoir.R;
 import com.example.moviememoir.ServerConnection.Server;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -54,6 +56,8 @@ public class MovieView extends Fragment {
     List<String> resultList2;
     List<String> resultList3;
 
+
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -79,13 +83,14 @@ public class MovieView extends Fragment {
         movieViewRatingOutput = view.findViewById(R.id.movieViewRatingOutput);
         addToWatchlistButton = view.findViewById(R.id.addToWatchlistButton);
         addToMemoirButton = view.findViewById(R.id.addToMemoirButton);
+
         //get passed value from movie search
         Bundle bundle = getArguments();
         movieID = bundle.getString("MovieID");
         releaseDate = bundle.getString("Release Date");
         movieName = bundle.getString("Movie Name");
         bitmap = bundle.getParcelable("Image");
-        if(getArguments().getString("movieExist").equals("false")){
+        if(getArguments().getString("movieExist").equals("exist")){
             addToWatchlistButton.setVisibility(View.INVISIBLE);
         }
         else {

@@ -88,7 +88,7 @@ public class WatchlistScreen extends Fragment {
                 Bundle bundle = new Bundle();
                 bundle.putString("MovieID",movieID);
                 bundle.putString("Movie Name",movieName);
-                bundle.putString("movieExist","false");
+                bundle.putString("movieExist","exist");
                 fragment.setArguments(bundle);
                 FragmentManager fragmentManager = getFragmentManager();
                 fragmentManager.beginTransaction().replace(R.id.content_frame,fragment).commit();
