@@ -109,7 +109,7 @@ public class AddToMemoir extends Fragment {
         addToMemoirReleaseDateOutput.setText(releaseDate);
         addToMemoirImageView.setImageBitmap(bitmap);
 
-        new findAllCinemaAsyncTask().execute();
+        new findAllCinema().execute();
 
         //pick the watch date
         Calendar calendar = Calendar.getInstance();// get a calendar using the current time zone and locale of the system. For example today is 10/05/2020, it will get 10,4, 2020
@@ -192,8 +192,8 @@ public class AddToMemoir extends Fragment {
                                         String cinemaSuburb = suburbEditText.getText().toString().trim();
                                         Cinematable cinematable = new Cinematable(Integer.parseInt(movieID),cinemaName,cinemaSuburb,"");
 
-                                        addCinemaAsyncTask addCinemaAsyncTask = new addCinemaAsyncTask();
-                                        addCinemaAsyncTask.execute(cinematable);
+                                        addCinema addCinema = new addCinema();
+                                        addCinema.execute(cinematable);
                                     }
                                 })
                         .setNegativeButton("Cancel",
@@ -218,7 +218,7 @@ public class AddToMemoir extends Fragment {
             public void onClick(View v) {
                 String rDate = releaseDate+ "T00:00:00+10:00";
                 memoirtable = new Memoirtable(Integer.parseInt(movieID),movieName,rDate,watchedDate,watchedTime,addToMemoirCommentInput.getText().toString(), (int) addToMemoirRatingOutput.getRating(),cinematable,Signin.usertable);
-                new postMemoirAsyncTask().execute(memoirtable);
+                new postMemoir().execute(memoirtable);
             }
         });
 
@@ -240,7 +240,7 @@ public class AddToMemoir extends Fragment {
         return result;
     }
 
-    private class findAllCinemaAsyncTask extends AsyncTask<Void, Void, String> {
+    private class findAllCinema extends AsyncTask<Void, Void, String> {
 
         @Override
         protected String doInBackground(Void... voids) {
@@ -291,7 +291,7 @@ public class AddToMemoir extends Fragment {
 
 
 
-    private class addCinemaAsyncTask extends AsyncTask<Cinematable, Void,Void> {
+    private class addCinema extends AsyncTask<Cinematable, Void,Void> {
         @Override
         protected Void doInBackground(Cinematable... cinematables) {
             Server.addCinema(cinematables[0]);
@@ -300,10 +300,10 @@ public class AddToMemoir extends Fragment {
 
         @Override
         protected void onPostExecute(Void aVoid) {
-            new findAllCinemaAsyncTask().execute();
+            new findAllCinema().execute();
         }
     }
-    private class postMemoirAsyncTask extends AsyncTask<Memoirtable,Void,Void>{
+    private class postMemoir extends AsyncTask<Memoirtable,Void,Void>{
 
         @Override
         protected Void doInBackground(Memoirtable... memoirtables) {

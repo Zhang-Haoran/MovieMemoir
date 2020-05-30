@@ -1,9 +1,7 @@
 package com.example.moviememoir.ScreenController;
 
-import android.app.ActivityManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.media.Image;
 import android.os.AsyncTask;
 import android.os.Bundle;
 
@@ -11,7 +9,6 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import android.os.Parcelable;
-import android.renderscript.ScriptGroup;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -65,14 +62,14 @@ public class MovieSearch extends Fragment {
                     movieSearchInput.setError("Please enter a movie");
                     Toast.makeText(getContext(),"Please check your input",Toast.LENGTH_SHORT).show();
                 }
-                new searchMovieAsyncTask().execute(movieSearchInput.getText().toString());
+                new searchMovie().execute(movieSearchInput.getText().toString());
             }
         });
         return view;
     }
 
     //search movie from The movieDB API
-    public class searchMovieAsyncTask extends AsyncTask<String,Void,String>{
+    public class searchMovie extends AsyncTask<String,Void,String>{
 
         @Override
         protected String doInBackground(String... strings) {
@@ -82,12 +79,12 @@ public class MovieSearch extends Fragment {
         @Override
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
-            new passResultToListViewAsyncTask().execute(s);
+            new passResult().execute(s);
         }
     }
 
     //fetch data from search result and pass them to list view
-    private class passResultToListViewAsyncTask extends AsyncTask<String,Void, SimpleAdapter>{
+    private class passResult extends AsyncTask<String,Void, SimpleAdapter>{
 
         @Override
         protected SimpleAdapter doInBackground(String... strings) {

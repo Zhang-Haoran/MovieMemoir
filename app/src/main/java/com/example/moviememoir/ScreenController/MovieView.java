@@ -12,15 +12,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.RatingBar;
-import android.widget.SimpleAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.moviememoir.Model.Watchlist;
 import com.example.moviememoir.R;
 import com.example.moviememoir.ServerConnection.Server;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -98,12 +95,12 @@ public class MovieView extends Fragment {
         }
 
         movieViewMovieNameOutput.setText(movieName);
-        new movieDetailAsyncTask().execute(movieID);
+        new movieDetail().execute(movieID);
 
         addToWatchlistButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new addToWatchlistAsyncTask().execute(Signin.usertable.getUserid().toString());
+                new addToWatchlist().execute(Signin.usertable.getUserid().toString());
             }
         });
 
@@ -126,7 +123,7 @@ public class MovieView extends Fragment {
     }
 
     //get movie detail from the movieDB api which is movie detail api
-    private class movieDetailAsyncTask extends AsyncTask<String,Void,String>{
+    private class movieDetail extends AsyncTask<String,Void,String>{
 
         @Override
         protected String doInBackground(String... strings) {
@@ -136,11 +133,11 @@ public class MovieView extends Fragment {
         @Override
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
-            new getDetailAsyncTask().execute(result);
+            new getDetail().execute(result);
         }
     }
     //get the target data and pass them into view
-    private class getDetailAsyncTask extends AsyncTask<String, Void, Void> {
+    private class getDetail extends AsyncTask<String, Void, Void> {
 
         @Override
         protected Void doInBackground(String... strings) {
@@ -159,11 +156,11 @@ public class MovieView extends Fragment {
             movieViewRatingScore.setText(resultList.get(4));
             float ratingFloat = Float.parseFloat(resultList.get(4))/10*5;
             movieViewRatingOutput.setRating(ratingFloat);
-            new getCreditAsyncTask().execute(movieID);
+            new getCredit().execute(movieID);
         }
     }
     //cast and director are in the different api section which is credit api
-    private class getCreditAsyncTask extends AsyncTask<String,Void,String>{
+    private class getCredit extends AsyncTask<String,Void,String>{
 
         @Override
         protected String doInBackground(String... strings) {
@@ -173,11 +170,11 @@ public class MovieView extends Fragment {
         @Override
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
-            new getCastAndDirectorAsyncTask().execute(s);
+            new getCastAndDirector().execute(s);
         }
     }
     //get the target data and pass them into view
-    private class getCastAndDirectorAsyncTask extends AsyncTask<String,Void,Void> {
+    private class getCastAndDirector extends AsyncTask<String,Void,Void> {
 
         @Override
         protected Void doInBackground(String... strings) {
@@ -203,7 +200,7 @@ public class MovieView extends Fragment {
         }
     }
 
-    private class addToWatchlistAsyncTask extends AsyncTask<String,Void,List<Watchlist>>{
+    private class addToWatchlist extends AsyncTask<String,Void,List<Watchlist>>{
 
         @Override
         protected List<Watchlist> doInBackground(String... strings) {

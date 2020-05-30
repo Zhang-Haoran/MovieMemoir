@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -16,12 +15,6 @@ import com.example.moviememoir.MainActivity;
 import com.example.moviememoir.Model.Usertable;
 import com.example.moviememoir.R;
 import com.example.moviememoir.ServerConnection.Server;
-import com.google.android.gms.maps.model.LatLng;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -71,7 +64,7 @@ public class Signin extends AppCompatActivity {
                 }
                 else {
                     //find user's account in database
-                    new signinAsyncTask().execute(usernameValue,passwordValue);
+                    new userSignin().execute(usernameValue,passwordValue);
 
 
                 }
@@ -88,7 +81,7 @@ public class Signin extends AppCompatActivity {
         });
     }
 
-    private class signinAsyncTask extends AsyncTask<String,Void,String> {
+    private class userSignin extends AsyncTask<String,Void,String> {
 
         @Override
         protected String doInBackground(String... strings) {

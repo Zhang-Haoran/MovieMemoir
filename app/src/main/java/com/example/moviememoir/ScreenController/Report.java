@@ -27,17 +27,12 @@ import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
-import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
 import com.github.mikephil.charting.formatter.IAxisValueFormatter;
-import com.github.mikephil.charting.formatter.PercentFormatter;
 import com.github.mikephil.charting.interfaces.datasets.IBarDataSet;
 import com.github.mikephil.charting.utils.ColorTemplate;
-
-import org.json.JSONArray;
-import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -123,7 +118,7 @@ public class Report extends Fragment {
        pieChartButton.setOnClickListener(new View.OnClickListener() {
            @Override
            public void onClick(View v) {
-               new findByUseridANDStartingdateANDEnddateAsyncTask().execute(startDateOutput.getText().toString(),endDateOutput.getText().toString());
+               new generatePie().execute(startDateOutput.getText().toString(),endDateOutput.getText().toString());
            }
        });
 
@@ -147,14 +142,14 @@ public class Report extends Fragment {
         barChartButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new findByUseridANDYearAsyncTask().execute(spinnerState);
+                new generateBar().execute(spinnerState);
             }
         });
 
         return view;
     }
 
-    private static class findByUseridANDStartingdateANDEnddateAsyncTask extends AsyncTask<String,Void, List<PieEntry>>{
+    private static class generatePie extends AsyncTask<String,Void, List<PieEntry>>{
         @Override
         protected List<PieEntry> doInBackground(String... strings) {
             return Server.findByUseridANDStartingdateANDEnddate(strings[0],strings[1]);
@@ -185,7 +180,7 @@ public class Report extends Fragment {
         }
     }
 
-    private static class findByUseridANDYearAsyncTask extends AsyncTask<String,Void,String>{
+    private static class generateBar extends AsyncTask<String,Void,String>{
 
         @Override
         protected String doInBackground(String... strings) {

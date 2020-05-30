@@ -72,11 +72,11 @@ public class Home extends Fragment {
         currentDateOutput.setText(simpleDateFormat.format(date));
 
         //get top movie
-        new topMovieAsyncTask().execute();
+        new topMovie().execute();
         return view;
     }
 
-    private class topMovieAsyncTask extends AsyncTask<String, Void,String>{
+    private class topMovie extends AsyncTask<String, Void,String>{
 
         @Override
         protected String doInBackground(String... strings) {
@@ -105,11 +105,11 @@ public class Home extends Fragment {
             int[] dataCell = new int[]{R.id.listViewMovieNameOutput,R.id.listViewReleaseDateOutput,R.id.listViewRatingOutput};
             SimpleAdapter simpleAdapter = new SimpleAdapter(Home.this.getContext(),topMovieList,R.layout.list_view_home,columnHeader,dataCell);
             topMovieListView.setAdapter(simpleAdapter);
-            new findUserLocationAsyncTask().execute(Signin.usertable.getAddress());
+            new findUserLocation().execute(Signin.usertable.getAddress());
         }
     }
 
-    private static class findUserLocationAsyncTask extends AsyncTask<String,Void,String>{
+    private static class findUserLocation extends AsyncTask<String,Void,String>{
 
         @Override
         protected String doInBackground(String... strings) {
@@ -132,10 +132,10 @@ public class Home extends Fragment {
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-            new getCinemaAsyncTask().execute();
+            new getCinema().execute();
         }
     }
-    private static class getCinemaAsyncTask extends AsyncTask<Void,Void,String>{
+    private static class getCinema extends AsyncTask<Void,Void,String>{
 
         @Override
         protected String doInBackground(Void... voids) {
@@ -155,11 +155,11 @@ public class Home extends Fragment {
                 e.printStackTrace();
             }
 
-            new googleFindCinemaAsyncTask().execute();
+            new googleFindCinema().execute();
         }
     }
 
-    private static class googleFindCinemaAsyncTask extends AsyncTask<String, Void, Void> {
+    private static class googleFindCinema extends AsyncTask<String, Void, Void> {
 
         @Override
         protected Void doInBackground(String... strings) {

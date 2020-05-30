@@ -53,7 +53,7 @@ public class MovieMemoir extends Fragment {
         genreSpinner = view.findViewById(R.id.genreSpinner);
 
         //get all the movie memoir data and display in the list view
-        new memoirAsyncTask().execute();
+        new allMemoir().execute();
 
         //set up state by using spinner
         ArrayList<String> arrayList = new ArrayList<>(Arrays.asList("Drama","Horror","Action","Comedy"));
@@ -96,7 +96,7 @@ public class MovieMemoir extends Fragment {
         return view;
     }
 
-    private class memoirAsyncTask extends AsyncTask<Void,Void,String> {
+    private class allMemoir extends AsyncTask<Void,Void,String> {
 
         @Override
         protected String doInBackground(Void... voids) {

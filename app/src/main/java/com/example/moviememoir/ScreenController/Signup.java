@@ -22,18 +22,14 @@ import com.example.moviememoir.Model.Credentialstable;
 import com.example.moviememoir.Model.Usertable;
 import com.example.moviememoir.R;
 import com.example.moviememoir.ServerConnection.Server;
-import com.google.gson.JsonArray;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
-import java.util.Scanner;
 
 public class Signup extends AppCompatActivity {
 
@@ -146,7 +142,7 @@ public class Signup extends AppCompatActivity {
             }
         });
 
-        new existingUsernameAsyncTask().execute();
+        new existingUsername().execute();
         //set up sign up button to submit form
         confirmSignupButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -190,7 +186,7 @@ public class Signup extends AppCompatActivity {
                     usertable.setAddress(addressInput.getText().toString());
                     usertable.setPostcode(postcodeInput.getText().toString());
                     //post the new usertable data into database
-                    new usertableAsyncTask().execute(usertable);
+                    new postUsertable().execute(usertable);
                     Intent intent = new Intent(Signup.this,Signin.class);
                     startActivity(intent);
                 }
@@ -221,7 +217,7 @@ public class Signup extends AppCompatActivity {
 
     //get current user id by counting the number of existing id
     //use AsyncTask to avoid time consuming when user is waiting to have multiple thread
-    private class currentUseridAsyncTask extends AsyncTask<Void,Void,String> {
+    private class currentUserid extends AsyncTask<Void,Void,String> {
         @Override
         protected String doInBackground(Void...voids)  {
            return Server.findCurrentUseridCount();
@@ -232,7 +228,7 @@ public class Signup extends AppCompatActivity {
         }
     }
     //get all the username to check if user enter existing username. record all username into list
-    private class existingUsernameAsyncTask extends AsyncTask<Void,Void,Void>{
+    private class existingUsername extends AsyncTask<Void,Void,Void>{
 
         @Override
         protected Void doInBackground(Void... voids) {
@@ -252,12 +248,12 @@ public class Signup extends AppCompatActivity {
         //to set asynctask order, put next asynctask in the post execute
         @Override
         protected void onPostExecute(Void nothing){
-             new currentUseridAsyncTask().execute();
+             new currentUserid().execute();
         }
     }
 
     //post new user data into database
-    private class usertableAsyncTask extends AsyncTask<Usertable,Void,Usertable>{
+    private class postUsertable extends AsyncTask<Usertable,Void,Usertable>{
 
         @Override
         protected Usertable doInBackground(Usertable... usertables) {
@@ -272,12 +268,12 @@ public class Signup extends AppCompatActivity {
             credentialstable.setUserid(usertable);
             credentialstable.setUsername(signupUsernameInput.getText().toString());
             credentialstable.setPasswordhash(Signin.md5(signupPasswordInput.getText().toString()));
-            new credentialstableAsyncTask().execute(credentialstable);
+            new postCredentialstable().execute(credentialstable);
 
         }
     }
     //post new credentials data into database
-    private class credentialstableAsyncTask extends AsyncTask<Credentialstable,Void,Void>{
+    private class postCredentialstable extends AsyncTask<Credentialstable,Void,Void>{
 
         @Override
         protected Void doInBackground(Credentialstable... credentialstables) {
